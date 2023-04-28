@@ -1,5 +1,6 @@
 package com.inditex.ecommerce.infrastructure.controllers;
 
+import com.inditex.ecommerce.application.services.ProductService;
 import com.inditex.ecommerce.domain.model.ProductRequest;
 import com.inditex.ecommerce.domain.model.ProductResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class ProductController {
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<ProductResponse>> getAllProductsByProductIdByDateAndPriceListId(ProductRequest productRequest) {
-        List<ProductResponse> products = productService.getAllProductsByProductIdByDateAndPriceListId();
+        List<ProductResponse> products = productService.getAllProductsByProductIdByDateAndPriceListId(productRequest);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

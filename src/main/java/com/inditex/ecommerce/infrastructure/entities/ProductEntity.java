@@ -1,5 +1,6 @@
 package com.inditex.ecommerce.infrastructure.entities;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,36 +15,29 @@ import java.util.List;
   Class Product
  */
 @Entity
-@Table(name = "products")
+@Table(name = "PRICES", uniqueConstraints = {@UniqueConstraint(columnNames = {"brandId"})})
 @Data
 @EqualsAndHashCode
-@NoArgsConstructor
 public class ProductEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
+    @NotNull
+    @Column(name = "BRAND_ID")
+    private Long brandId;
+    @Column(name = "PRODUCT_ID")
     private Long productId;
-
-    @Column(name="start_date")
+    @Column(name="START_DATE")
     private LocalDateTime startDate;
-
-    @Column(name="end_date")
+    @Column(name="END_DATE")
     private LocalDateTime endDate;
-
+    @Column(name="PRIORITY")
     private Integer priority;
+    @Column(name= "PRICE")
     private Double price;
-    private Currency currency;
+    @Column(name= "CURR")
+    private String currency;
+    @Column(name= "PRICE_LIST")
+    private Long priceList;
 
-    @OneToOne
-    @JoinColumn(name="brand_product")
-    private BrandEntity brand;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "product_price", joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "price_id")
-    )
-    @Column(name="price_list")
-    private List<PriceEntity> priceList = new ArrayList<>();
 
 }

@@ -6,9 +6,11 @@ import java.time.LocalDateTime;
 
 public class ProductRequest {
 
+    @NotNull
     private Long productId;
 
+    @NotNull
     private LocalDateTime currentDate;
-
-    private Long priceListId;
+    @NotNull
+    private Long brandId;
 }
