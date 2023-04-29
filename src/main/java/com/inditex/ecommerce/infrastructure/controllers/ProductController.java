@@ -23,7 +23,7 @@ public class ProductController {
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<ProductResponse>> getAllProductsByProductIdByDateAndPriceListId(ProductRequest productRequest) {
-        List<ProductResponse> products = productService.getAllProductsByProductIdByDateAndPriceListId(productRequest);
+        List<ProductResponse> products = productService.getProductByProductIdByDateAndPriceListId(productRequest);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

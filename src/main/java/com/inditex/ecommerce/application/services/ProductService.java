@@ -13,7 +13,7 @@ public class ProductService implements ProductUseCase {
     private final ProductUseCase productUseCase;
 
     @Override
-    public List<ProductResponse> getAllProductsByProductIdByDateAndPriceListId(ProductRequest productRequest) {
-        return productUseCase.getAllProductsByProductIdByDateAndPriceListId(productRequest);
+    public ProductResponse getProductByProductIdByDateAndPriceListId(ProductRequest productRequest) {
+        return (ProductResponse) productUseCase.getProductByProductIdByDateAndPriceListId(productRequest);
     }
 }

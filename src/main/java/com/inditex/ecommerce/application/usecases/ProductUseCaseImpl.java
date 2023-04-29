@@ -6,14 +6,12 @@ import com.inditex.ecommerce.domain.ports.input.ProductUseCase;
 import com.inditex.ecommerce.domain.ports.output.ProductRepositoryPort;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 public class ProductUseCaseImpl implements ProductUseCase {
 
     private final ProductRepositoryPort productRepositoryPort;
     @Override
-    public List<ProductResponse> getAllProductsByProductIdByDateAndPriceListId(ProductRequest productRequest) {
-        return productRepositoryPort.getAllProductsByProductIdByDateAndPriceListId(productRequest);
+    public ProductResponse getProductByProductIdByDateAndPriceListId(ProductRequest productRequest) {
+        return productRepositoryPort.getProductByProductIdByDateAndPriceListId(productRequest);
     }
 }
