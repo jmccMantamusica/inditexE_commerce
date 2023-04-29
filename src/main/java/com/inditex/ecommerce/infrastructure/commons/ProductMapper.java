@@ -1,17 +1,16 @@
 package com.inditex.ecommerce.infrastructure.commons;
 
+import com.inditex.ecommerce.domain.model.ProductRequest;
 import com.inditex.ecommerce.domain.model.ProductResponse;
 import com.inditex.ecommerce.infrastructure.entities.ProductEntity;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper
 public interface ProductMapper {
 
-    @Mapping(target="employeeId", source="product.id")
-    @Mapping(target="employeeName", source="product.name")
-    ProductResponse employeeToEmployeeDTO(ProductEntity product);
-
+    ProductResponse producEntitytToProductResponse(ProductEntity productEntity);
 
 }

@@ -10,9 +10,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService implements ProductUseCase {
 
+    private final ProductUseCase productUseCase;
 
     @Override
     public List<ProductResponse> getAllProductsByProductIdByDateAndPriceListId(ProductRequest productRequest) {
-        return null;
+        return productUseCase.getAllProductsByProductIdByDateAndPriceListId(productRequest);
     }
 }
