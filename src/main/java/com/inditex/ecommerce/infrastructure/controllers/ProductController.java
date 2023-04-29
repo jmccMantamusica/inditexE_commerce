@@ -22,8 +22,8 @@ public class ProductController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<List<ProductResponse>> getAllProductsByProductIdByDateAndPriceListId(ProductRequest productRequest) {
-        List<ProductResponse> products = productService.getProductByProductIdByDateAndPriceListId(productRequest);
-        return new ResponseEntity<>(products, HttpStatus.OK);
+    public ResponseEntity<ProductResponse> getAllProductsByProductIdByDateAndPriceListId(ProductRequest productRequest) {
+        ProductResponse product = productService.getProductByProductIdByDateAndPriceListId(productRequest);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }
