@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="config mvc" />
+    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="swagger" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,20 +40,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DELOMBOK_PRE_COMMIT&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/utilitiy&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DELOMBOK_PRE_COMMIT": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/utilitiy",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\resources" />
@@ -67,12 +68,13 @@
       <recent name="com.inditex.ecommerce.infrastructure" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.inditex.ecommerce.infrastructure" />
       <recent name="com.inditex.ecommerce.application.rest" />
       <recent name="com.inditex.ecommerce.application.response" />
       <recent name="com.inditex.ecommerce.application.request" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ecommerce_exa">
+  <component name="RunManager" selected="Application.ecommerce_mvc">
     <configuration name="ecommerce_exa" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -215,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682956237159</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="swagger">
+      <created>1682967021911</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682967021911</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -230,6 +239,7 @@
     <MESSAGE value="fix to receive a single result from query 2" />
     <MESSAGE value="ended" />
     <MESSAGE value="config mvc" />
-    <option name="LAST_COMMIT_MESSAGE" value="config mvc" />
+    <MESSAGE value="swagger" />
+    <option name="LAST_COMMIT_MESSAGE" value="swagger" />
   </component>
 </project>
