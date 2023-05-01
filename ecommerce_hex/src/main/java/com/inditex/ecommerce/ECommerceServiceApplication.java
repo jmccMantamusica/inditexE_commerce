@@ -1,13 +1,12 @@
-package com.inditex.ecommerce.infrastructure.config;
+package com.inditex.ecommerce;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.PropertySource;
-
+/**
+ *
+ * @author jcagigas
+ */
 @SpringBootApplication
 @EntityScan("com.inditex.ecommerce.infrastructure.entity")
 public class ECommerceServiceApplication {

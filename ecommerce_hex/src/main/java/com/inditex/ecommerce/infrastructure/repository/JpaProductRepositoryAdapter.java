@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
+/**
+ *
+ * @author jcagigas
+ */
 @Component
 public class JpaProductRepositoryAdapter implements ProductRepository {
 

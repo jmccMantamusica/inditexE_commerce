@@ -6,7 +6,10 @@ import lombok.Setter;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-
+/**
+ *
+ * @author jcagigas
+ */
 @Getter
 @Setter
 @EqualsAndHashCode

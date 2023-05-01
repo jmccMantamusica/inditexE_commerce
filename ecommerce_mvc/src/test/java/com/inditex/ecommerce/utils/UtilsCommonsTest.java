@@ -44,11 +44,7 @@ public class UtilsCommonsTest {
     }
 
     public ProductRequest generateRequest(int day, int hour) {
-        ProductRequest productRequest = new ProductRequest();
-        productRequest.setCurrentDate(this.generateDate(day, hour));
-        productRequest.setBrandId(1L);
-        productRequest.setProductId(35455L);
-        return productRequest;
+        return new ProductRequest(35455L, 1L, this.generateDate(day, hour));
     }
 
     public LocalDateTime generateDate(int day, int hour) {

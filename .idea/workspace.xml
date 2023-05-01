@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="ended">
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/rest/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/rest/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/DomainException.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/DomainException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/DomainProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/DomainProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/config/ECommerceServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/ECommerceServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandPk.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandPk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2P2pyEDU4DoleZ5XOEiOgznRu50" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DELOMBOK_PRE_COMMIT": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/utilitiy",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\resources" />
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce\infrastructure\entity" />
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce" />
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce\application" />
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce\domain" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.inditex.ecommerce" />
+      <recent name="com.inditex.ecommerce.infrastructure" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.inditex.ecommerce.application.rest" />
+      <recent name="com.inditex.ecommerce.application.response" />
+      <recent name="com.inditex.ecommerce.application.request" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ecommerce_exa">
+    <configuration name="ecommerce_exa" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceServiceApplication" />
+      <module name="e-commerce (1)" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ecommerce_mvc" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceServiceApplication" />
+      <module name="e-commerce (2)" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="inditexE_commerce" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="inditexE_commerce" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="e-commerce [clean,package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.ecommerce_exa" />
+      <item itemvalue="Application.ecommerce_mvc" />
+      <item itemvalue="Maven.e-commerce [clean,package]" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="" />
+      <created>1682665283782</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682665283782</updated>
+    </task>
+    <task id="LOCAL-00001" summary="First Step Spring Initializer">
+      <created>1682665402905</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682665402905</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add mapstruct mapper">
+      <created>1682666154457</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682666154457</updated>
+    </task>
+    <task id="LOCAL-00003" summary="config maven to work">
+      <created>1682666567538</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682666567538</updated>
+    </task>
+    <task id="LOCAL-00004" summary="adding class to structure">
+      <created>1682674943731</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682674943731</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix part 1">
+      <created>1682696376808</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682696376809</updated>
+    </task>
+    <task id="LOCAL-00006" summary="list, pasamos a pruebas">
+      <created>1682771703455</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682771703455</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix to receive a single result from query">
+      <created>1682795525165</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682795525165</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix to receive a single result from query 2">
+      <created>1682795602652</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682795602652</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ended">
+      <created>1682955522401</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682955522401</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="First Step Spring Initializer" />
+    <MESSAGE value="add mapstruct mapper" />
+    <MESSAGE value="config maven to work" />
+    <MESSAGE value="adding class to structure" />
+    <MESSAGE value="fix part 1" />
+    <MESSAGE value="list, pasamos a pruebas" />
+    <MESSAGE value="fix to receive a single result from query" />
+    <MESSAGE value="fix to receive a single result from query 2" />
+    <MESSAGE value="ended" />
+    <option name="LAST_COMMIT_MESSAGE" value="ended" />
+  </component>
+</project>

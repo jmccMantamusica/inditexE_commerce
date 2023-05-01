@@ -9,7 +9,10 @@ import org.mapstruct.Mapping;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-
+/**
+ *
+ * @author jcagigas
+ */
 @Mapper
 public interface ProductMapper {
 

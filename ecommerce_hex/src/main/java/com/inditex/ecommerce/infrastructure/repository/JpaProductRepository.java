@@ -6,7 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-
+/**
+ *
+ * @author jcagigas
+ */
 @Repository
 public interface JpaProductRepository {
     @Query(value = "SELECT p FROM Product p " +

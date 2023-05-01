@@ -19,7 +19,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<ProductResponse> getAllProduct(ProductRequest productRequest) {
+    public ResponseEntity<ProductResponse> getAllProduct(@RequestBody ProductRequest productRequest) {
         return new ResponseEntity<>(
                 productService.findByProductIdAndBrandIdAndCurrentDate(productRequest), HttpStatus.OK);
     }
