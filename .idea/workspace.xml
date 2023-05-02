@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="fix entities and sql">
+    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="fix jpa">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/request/ProductRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/response/ProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/BrandEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/Brand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +257,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683022256357</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fix entities and sql">
+      <created>1683030979477</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1683030979477</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix jpa">
+      <created>1683032113168</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1683032113168</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,25 +301,16 @@
     <MESSAGE value="swagger fix properties" />
     <MESSAGE value="fix api properties" />
     <MESSAGE value="fix entities and sql" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix entities and sql" />
+    <MESSAGE value="fix jpa" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix jpa" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="11" />
+          <line>44</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,10 +14,10 @@ import java.util.Set;
  * @author jcagigas
  */
 @Entity
-@Table
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode
-public class BrandEntity {
+public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +25,6 @@ public class BrandEntity {
 
     private String name;
 
-    @OneToMany(mappedBy="brandEntity",cascade=CascadeType.ALL)
-    private Set<ProductEntity> productEntities = new HashSet<>();
+    @OneToMany(mappedBy="brand",cascade=CascadeType.ALL)
+    private Set<Product> productEntities = new HashSet<>();
 }
