@@ -18,8 +18,7 @@ public interface ProductMapper {
 
     ProductResponse toDomain(Product product);
 
-    @Mapping(source = "entity.brandPk.brandId", target = "brandId")
-    @Mapping(source = "entity.brandPk.priceList", target = "priceList")
+    @Mapping(source = "entity.brandEntity.id", target = "brandId")
     Product toModel(ProductEntity entity);
 
     default LocalDateTime mapTimestamp(Timestamp timestamp) {

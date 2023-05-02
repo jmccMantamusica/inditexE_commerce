@@ -2,23 +2,25 @@ package com.inditex.ecommerce.infrastructure.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 /**
  *
  * @author jcagigas
  */
 @Entity
-@Table(name = "PRICES")
+@Table
 @Data
 @EqualsAndHashCode
 public class ProductEntity {
 
-	@EmbeddedId
-	private BrandPk brandPk;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long priceList;
+
+	@ManyToOne (cascade=CascadeType.ALL)
+	private BrandEntity brandEntity;
 
 	private Long productId;
 

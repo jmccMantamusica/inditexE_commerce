@@ -12,8 +12,8 @@ import java.time.ZoneId;
 @Mapper
 public interface ProductMapper {
 
-    @Mapping(source = "entity.brandPk.brandId", target = "brandId")
-    @Mapping(source = "entity.brandPk.priceList", target = "priceList")
+    @Mapping(source = "entity.brandEntity.brandId", target = "brandId")
+    @Mapping(source = "entity.brandEntity.priceList", target = "priceList")
     ProductResponse toResponse(ProductEntity entity);
 
     default LocalDateTime mapTimestamp(Timestamp timestamp) {

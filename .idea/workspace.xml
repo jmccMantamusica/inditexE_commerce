@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="swagger fix properties">
-      <change afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/Utils.java" afterDir="false" />
+    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="fix entities and sql">
+      <change afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/rest/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/rest/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandPk.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/test/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/BrandPk.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/BrandEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/test/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,33 +57,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DELOMBOK_PRE_COMMIT&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/utilitiy&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DELOMBOK_PRE_COMMIT": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_hex/src/main/resources",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\main\resources" />
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\test\resources" />
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_mvc\src\test\resources" />
+      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\main\java\com\inditex\ecommerce\infrastructure\entity" />
       <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\resources" />
-      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce\infrastructure\entity" />
-      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce" />
-      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce\application" />
-      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\java\com\inditex\ecommerce\domain" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.inditex.ecommerce" />
       <recent name="com.inditex.ecommerce.infrastructure" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.inditex.ecommerce.service.utility.commons" />
       <recent name="com.inditex.ecommerce.infrastructure" />
       <recent name="com.inditex.ecommerce.application.rest" />
       <recent name="com.inditex.ecommerce.application.response" />
@@ -238,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682967798129</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix api properties">
+      <created>1683017537782</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1683017537782</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -255,6 +272,19 @@
     <MESSAGE value="config mvc" />
     <MESSAGE value="swagger" />
     <MESSAGE value="swagger fix properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="swagger fix properties" />
+    <MESSAGE value="fix api properties" />
+    <MESSAGE value="fix entities and sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix entities and sql" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

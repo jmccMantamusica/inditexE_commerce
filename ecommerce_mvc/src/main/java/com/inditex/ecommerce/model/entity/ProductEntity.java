@@ -2,6 +2,7 @@ package com.inditex.ecommerce.model.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,13 +11,17 @@ import java.sql.Timestamp;
  * @author jcagigas
  */
 @Entity
-@Table(name = "PRICES")
+@Table
 @Data
 @EqualsAndHashCode
 public class ProductEntity {
 
-	@EmbeddedId
-	private BrandPk brandPk;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long priceList;
+
+	@ManyToOne (cascade=CascadeType.ALL)
+	private BrandEntity brandEntity;
 
 	private Long productId;
 

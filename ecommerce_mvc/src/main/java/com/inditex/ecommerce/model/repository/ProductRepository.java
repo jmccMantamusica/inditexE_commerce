@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository {
-    @Query(value = "SELECT p FROM Product p " +
-            "WHERE pro.productId=:productId AND p.brandId=:brandId " +
-            "AND :currentDate BETWEEN p.startDate AND p.endDate" +
+    @Query(value = "SELECT p FROM PRODUCT_ENTITY p " +
+            "WHERE p.PRODUCT_ID=:productId AND p.BRAND_ID=:brandId " +
+            "AND :currentDate BETWEEN p.START_DATE AND p.END_DATE" +
             "ORDER BY p.priority DESC LIMIT 1")
     Optional<ProductEntity> findByProductIdAndBrandIdAndCurrentDate(Long productId, Long brandId,
                                                                     LocalDateTime currentDate);
