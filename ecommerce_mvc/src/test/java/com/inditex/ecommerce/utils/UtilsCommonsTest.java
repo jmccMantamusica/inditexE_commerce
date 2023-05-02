@@ -1,6 +1,6 @@
 package com.inditex.ecommerce.utils;
-import com.inditex.ecommerce.model.dto.request.ProductRequest;
-import com.inditex.ecommerce.model.dto.response.ProductResponse;
+import com.inditex.ecommerce.model.dto.ProductRequest;
+import com.inditex.ecommerce.model.dto.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;

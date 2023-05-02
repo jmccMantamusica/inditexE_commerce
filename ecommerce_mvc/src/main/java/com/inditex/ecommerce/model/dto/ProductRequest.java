@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.model.dto.request;
+package com.inditex.ecommerce.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.inditex.ecommerce;
 
-import com.inditex.ecommerce.model.dto.request.ProductRequest;
-import com.inditex.ecommerce.model.dto.response.ProductResponse;
+import com.inditex.ecommerce.model.dto.ProductRequest;
+import com.inditex.ecommerce.model.dto.ProductResponse;
 import com.inditex.ecommerce.utils.UtilsCommonsTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

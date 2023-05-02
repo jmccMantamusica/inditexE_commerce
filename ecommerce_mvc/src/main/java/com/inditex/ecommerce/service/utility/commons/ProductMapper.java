@@ -1,6 +1,6 @@
 package com.inditex.ecommerce.service.utility.commons;
 
-import com.inditex.ecommerce.model.dto.response.ProductResponse;
+import com.inditex.ecommerce.model.dto.ProductResponse;
 import com.inditex.ecommerce.model.entity.ProductEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,8 +12,7 @@ import java.time.ZoneId;
 @Mapper
 public interface ProductMapper {
 
-    @Mapping(source = "entity.brandEntity.brandId", target = "brandId")
-    @Mapping(source = "entity.brandEntity.priceList", target = "priceList")
+    @Mapping(source = "entity.brandEntity.id", target = "brandId")
     ProductResponse toResponse(ProductEntity entity);
 
     default LocalDateTime mapTimestamp(Timestamp timestamp) {

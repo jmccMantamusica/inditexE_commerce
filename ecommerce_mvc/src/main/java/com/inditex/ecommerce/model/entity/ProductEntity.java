@@ -6,6 +6,8 @@ import lombok.Generated;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author jcagigas
@@ -25,9 +27,9 @@ public class ProductEntity {
 
 	private Long productId;
 
-	private Timestamp startDate;
+	private LocalDateTime startDate;
 
-	private Timestamp endDate;
+	private LocalDateTime endDate;
 
 	private Integer priority;
 

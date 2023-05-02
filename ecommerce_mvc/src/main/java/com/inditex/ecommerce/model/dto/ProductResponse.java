@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.model.dto.response;
+package com.inditex.ecommerce.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
