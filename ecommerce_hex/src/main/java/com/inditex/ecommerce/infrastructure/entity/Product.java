@@ -1,32 +1,36 @@
 package com.inditex.ecommerce.infrastructure.entity;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author jcagigas
  */
 @Entity
 @Table
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode
-public class ProductEntity {
+public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long priceList;
 
 	@ManyToOne (cascade=CascadeType.ALL)
-	private BrandEntity brandEntity;
+	private Brand brand;
 
 	private Long productId;
 
-	private Timestamp startDate;
+	private LocalDateTime startDate;
 
-	private Timestamp endDate;
+	private LocalDateTime endDate;
 
 	private Integer priority;
 

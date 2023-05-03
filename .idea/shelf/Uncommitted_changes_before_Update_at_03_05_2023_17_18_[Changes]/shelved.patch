@@ -1,0 +1,884 @@
+Index: ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce.controller;\r\n\r\nimport com.inditex.ecommerce.model.dto.ProductRequest;\r\nimport com.inditex.ecommerce.model.dto.ProductResponse;\r\nimport com.inditex.ecommerce.service.ProductService;\r\nimport io.swagger.annotations.Api;\r\nimport io.swagger.annotations.ApiOperation;\r\nimport io.swagger.annotations.ApiResponse;\r\nimport io.swagger.annotations.ApiResponses;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n/**\r\n *\r\n * @author jcagigas\r\n */\r\n@RestController\r\n@RequestMapping(path = \"api/v1\")\r\n@RequiredArgsConstructor\r\n@Api(tags = {\"Api\"})\r\npublic class ProductController {\r\n\r\n    private final ProductService productService;\r\n\r\n    @ApiOperation(value = \"Get product\", notes = \"Retrieve product requested\")\r\n\r\n    @GetMapping(\"/product\")\r\n    public ResponseEntity<ProductResponse> getAllProduct(@RequestBody ProductRequest productRequest) {\r\n        return new ResponseEntity<>(\r\n                productService.findByProductIdAndBrandIdAndCurrentDate(productRequest), HttpStatus.OK);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java b/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java
+--- a/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java	(date 1683126645878)
+@@ -5,13 +5,12 @@
+ import com.inditex.ecommerce.service.ProductService;
+ import io.swagger.annotations.Api;
+ import io.swagger.annotations.ApiOperation;
+-import io.swagger.annotations.ApiResponse;
+-import io.swagger.annotations.ApiResponses;
+ import lombok.RequiredArgsConstructor;
+-import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.*;
++
++
+ /**
+  *
+  * @author jcagigas
+@@ -25,9 +24,8 @@
+     private final ProductService productService;
+ 
+     @ApiOperation(value = "Get product", notes = "Retrieve product requested")
+-
+     @GetMapping("/product")
+-    public ResponseEntity<ProductResponse> getAllProduct(@RequestBody ProductRequest productRequest) {
++    public ResponseEntity<ProductResponse> getAllProduct(ProductRequest productRequest) {
+         return new ResponseEntity<>(
+                 productService.findByProductIdAndBrandIdAndCurrentDate(productRequest), HttpStatus.OK);
+     }
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce.infrastructure.commons;\r\n\r\nimport com.inditex.ecommerce.application.response.ProductResponse;\r\nimport com.inditex.ecommerce.domain.Product;\r\nimport com.inditex.ecommerce.infrastructure.entity.ProductEntity;\r\nimport org.mapstruct.Mapper;\r\nimport org.mapstruct.Mapping;\r\n\r\nimport java.sql.Timestamp;\r\nimport java.time.LocalDateTime;\r\nimport java.time.ZoneId;\r\n/**\r\n *\r\n * @author jcagigas\r\n */\r\n@Mapper\r\npublic interface ProductMapper {\r\n\r\n    ProductResponse toDomain(Product product);\r\n\r\n    @Mapping(source = \"entity.brandEntity.id\", target = \"brandId\")\r\n    Product toModel(ProductEntity entity);\r\n\r\n    default LocalDateTime mapTimestamp(Timestamp timestamp) {\r\n        return timestamp.toInstant()\r\n                .atZone(ZoneId.systemDefault())\r\n                .toLocalDateTime();\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java	(date 1683126645656)
+@@ -1,8 +1,8 @@
+ package com.inditex.ecommerce.infrastructure.commons;
+ 
+ import com.inditex.ecommerce.application.response.ProductResponse;
+-import com.inditex.ecommerce.domain.Product;
+-import com.inditex.ecommerce.infrastructure.entity.ProductEntity;
++import com.inditex.ecommerce.domain.ProductDto;
++import com.inditex.ecommerce.infrastructure.entity.Product;
+ import org.mapstruct.Mapper;
+ import org.mapstruct.Mapping;
+ 
+@@ -16,10 +16,9 @@
+ @Mapper
+ public interface ProductMapper {
+ 
+-    ProductResponse toDomain(Product product);
++    @Mapping(source = "entity.brand.id", target = "brandId")
++    ProductDto toDto(Product entity);
+ 
+-    @Mapping(source = "entity.brandEntity.id", target = "brandId")
+-    Product toModel(ProductEntity entity);
+ 
+     default LocalDateTime mapTimestamp(Timestamp timestamp) {
+         return timestamp.toInstant()
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce.application.request;\r\n\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Getter;\r\nimport lombok.Setter;\r\nimport org.springframework.format.annotation.DateTimeFormat;\r\n\r\nimport java.time.LocalDateTime;\r\n/**\r\n *\r\n * @author jcagigas\r\n */\r\n@Getter\r\n@Setter\r\n@AllArgsConstructor\r\npublic class ProductRequest {\r\n\r\n    private Long productId;\r\n    private Long brandId;\r\n    private LocalDateTime currentDate;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/request/ProductRequest.java	(date 1683127111035)
+@@ -17,5 +17,6 @@
+ 
+     private Long productId;
+     private Long brandId;
++    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+     private LocalDateTime currentDate;
+ }
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce.infrastructure.repository;\r\n\r\nimport com.inditex.ecommerce.infrastructure.entity.ProductEntity;\r\nimport org.springframework.data.jpa.repository.Query;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.time.LocalDateTime;\r\nimport java.util.Optional;\r\n/**\r\n *\r\n * @author jcagigas\r\n */\r\n@Repository\r\npublic interface JpaProductRepository {\r\n    @Query(value = \"SELECT p FROM PRODUCT_ENTITY p \" +\r\n            \"WHERE p.PRODUCT_ID=:productId AND p.BRAND_ENTITY_ID=:brandId \" +\r\n            \"AND :currentDate BETWEEN p.START_DATE AND p.END_DATE\" +\r\n            \"ORDER BY p.PRIORITY DESC LIMIT 1\")\r\n    Optional<ProductEntity> findByProductIdAndBrandIdAndCurrentDate(Long productId, Long brandId,\r\n                                                                    LocalDateTime currentDate);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java	(date 1683126646042)
+@@ -1,6 +1,7 @@
+ package com.inditex.ecommerce.infrastructure.repository;
+ 
+-import com.inditex.ecommerce.infrastructure.entity.ProductEntity;
++import com.inditex.ecommerce.infrastructure.entity.Product;
++import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.data.jpa.repository.Query;
+ import org.springframework.stereotype.Repository;
+ 
+@@ -11,11 +12,11 @@
+  * @author jcagigas
+  */
+ @Repository
+-public interface JpaProductRepository {
++public interface JpaProductRepository extends JpaRepository<Product, Long> {
+     @Query(value = "SELECT p FROM PRODUCT_ENTITY p " +
+             "WHERE p.PRODUCT_ID=:productId AND p.BRAND_ENTITY_ID=:brandId " +
+             "AND :currentDate BETWEEN p.START_DATE AND p.END_DATE" +
+             "ORDER BY p.PRIORITY DESC LIMIT 1")
+-    Optional<ProductEntity> findByProductIdAndBrandIdAndCurrentDate(Long productId, Long brandId,
++    Optional<Product> findByProductIdAndBrandIdAndCurrentDate(Long productId, Long brandId,
+                                                                     LocalDateTime currentDate);
+ }
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce.infrastructure.repository;\r\n\r\nimport com.inditex.ecommerce.application.request.ProductRequest;\r\nimport com.inditex.ecommerce.domain.Product;\r\nimport com.inditex.ecommerce.domain.repository.ProductRepository;\r\nimport com.inditex.ecommerce.infrastructure.commons.ProductMapper;\r\n\r\nimport com.inditex.ecommerce.infrastructure.entity.ProductEntity;\r\nimport org.slf4j.Logger;\r\nimport org.slf4j.LoggerFactory;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Component;\r\nimport org.springframework.transaction.annotation.Transactional;\r\n\r\nimport java.util.Optional;\r\n/**\r\n *\r\n * @author jcagigas\r\n */\r\n@Component\r\npublic class JpaProductRepositoryAdapter implements ProductRepository {\r\n\r\n    private final JpaProductRepository jpaProductRepository;\r\n    private final ProductMapper productMapper;\r\n\r\n    private static Logger logger = LoggerFactory.getLogger(JpaProductRepositoryAdapter.class);\r\n\r\n    @Autowired\r\n    public JpaProductRepositoryAdapter(JpaProductRepository jpaProductRepository, ProductMapper productMapper) {\r\n        this.jpaProductRepository = jpaProductRepository;\r\n        this.productMapper = productMapper;\r\n    }\r\n\r\n    @Override\r\n    @Transactional(readOnly = true)\r\n    public Optional<Product> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest) {\r\n\r\n        Optional<ProductEntity> productEntity = jpaProductRepository.findByProductIdAndBrandIdAndCurrentDate(\r\n                productRequest.getProductId(), productRequest.getBrandId(), productRequest.getCurrentDate());\r\n\r\n        if (!productEntity.isPresent()) {\r\n            logger.error(\"There is no product with the requested data.\");\r\n            return Optional.empty();\r\n        } else {\r\n            return Optional.of(productMapper.toModel(productEntity.get()));\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java	(date 1683126645897)
+@@ -1,11 +1,11 @@
+ package com.inditex.ecommerce.infrastructure.repository;
+ 
+ import com.inditex.ecommerce.application.request.ProductRequest;
+-import com.inditex.ecommerce.domain.Product;
++import com.inditex.ecommerce.domain.ProductDto;
+ import com.inditex.ecommerce.domain.repository.ProductRepository;
+ import com.inditex.ecommerce.infrastructure.commons.ProductMapper;
+ 
+-import com.inditex.ecommerce.infrastructure.entity.ProductEntity;
++import com.inditex.ecommerce.infrastructure.entity.Product;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
+ import org.springframework.beans.factory.annotation.Autowired;
+@@ -33,16 +33,16 @@
+ 
+     @Override
+     @Transactional(readOnly = true)
+-    public Optional<Product> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest) {
++    public Optional<ProductDto> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest) {
+ 
+-        Optional<ProductEntity> productEntity = jpaProductRepository.findByProductIdAndBrandIdAndCurrentDate(
++        Optional<Product> productEntity = jpaProductRepository.findByProductIdAndBrandIdAndCurrentDate(
+                 productRequest.getProductId(), productRequest.getBrandId(), productRequest.getCurrentDate());
+ 
+         if (!productEntity.isPresent()) {
+             logger.error("There is no product with the requested data.");
+             return Optional.empty();
+         } else {
+-            return Optional.of(productMapper.toModel(productEntity.get()));
++            return Optional.of(productMapper.toDto(productEntity.get()));
+         }
+     }
+ 
+Index: ecommerce_hex/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java
+===================================================================
+diff --git a/ecommerce_hex/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java b/ecommerce_hex/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java
+deleted file mode 100644
+--- a/ecommerce_hex/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ /dev/null	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
+@@ -1,57 +0,0 @@
+-package com.inditex.ecommerce.utils;
+-import com.inditex.ecommerce.application.request.ProductRequest;
+-import com.inditex.ecommerce.application.response.ProductResponse;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.test.web.client.TestRestTemplate;
+-import org.springframework.boot.test.web.server.LocalServerPort;
+-import org.springframework.http.HttpMethod;
+-import org.springframework.http.ResponseEntity;
+-import org.springframework.stereotype.Component;
+-import org.springframework.web.util.UriComponentsBuilder;
+-
+-import java.time.LocalDateTime;
+-
+-@Component
+-public class UtilsCommonsTest {
+-
+-    @Autowired
+-    private TestRestTemplate testRestTemplate;
+-
+-    @LocalServerPort
+-    private Integer localPort;
+-
+-
+-
+-    public ResponseEntity<ProductResponse> callToController(ProductRequest productRequest) {
+-        UriComponentsBuilder paramBuilder = this.queryParamBuilder(productRequest.getCurrentDate(),
+-                productRequest.getProductId(), productRequest.getBrandId());
+-
+-        ResponseEntity<ProductResponse> response = this.doGet(paramBuilder);
+-        return response;
+-    }
+-
+-    public UriComponentsBuilder queryParamBuilder(LocalDateTime currentDate, Long productId, Long brandId) {
+-        return UriComponentsBuilder.fromHttpUrl("http://localhost:" + localPort + "/api/v1/product")
+-                .queryParam("currentDate", currentDate)
+-                .queryParam("productId", productId)
+-                .queryParam("brandId", brandId);
+-    }
+-
+-    public ResponseEntity<ProductResponse> doGet(UriComponentsBuilder builder) {
+-        return testRestTemplate.exchange(
+-                builder.build().encode().toUri(),
+-                HttpMethod.GET, null, ProductResponse.class);
+-    }
+-
+-    public ProductRequest generateRequest(int day, int hour) {
+-        return new ProductRequest(35455L, 1L, this.generateDate(day, hour));
+-    }
+-
+-    public LocalDateTime generateDate(int day, int hour) {
+-        return LocalDateTime.of(2020, 6, day, hour, 0, 0);
+-    }
+-
+-    public boolean dateIncludedBetweenDates(LocalDateTime currenDate, ProductResponse productResponse) {
+-        return true;
+-    }
+-}
+Index: ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce;\r\n\r\nimport com.inditex.ecommerce.application.request.ProductRequest;\r\nimport com.inditex.ecommerce.application.response.ProductResponse;\r\nimport com.inditex.ecommerce.utils.UtilsCommonsTest;\r\nimport org.junit.jupiter.api.Assertions;\r\nimport org.junit.jupiter.api.Test;\r\nimport org.springframework.boot.test.context.SpringBootTest;\r\nimport org.springframework.boot.test.context.SpringBootTest.*;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\n\r\n\r\n@SpringBootTest(classes = ECommerceServiceApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)\r\nclass ECommerceApplicationTests {\r\n\r\n\tprivate final UtilsCommonsTest utilsCommonsTest;\r\n\r\n\tECommerceApplicationTests(UtilsCommonsTest utilsCommonsTest) {\r\n\t\tthis.utilsCommonsTest = utilsCommonsTest;\r\n\t}\r\n\r\n\r\n\t@Test\r\n\tvoid Test1() {\r\n\r\n\t\tint day = 14;\r\n\t\tint hour = 10;\r\n\t\tProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);\r\n\t\tResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);\r\n\t\tProductResponse productResponse = response.getBody();\r\n\t\tAssertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),\r\n\t\t\t\t() -> Assertions.assertEquals(35.5F, productResponse.getPrice()),\r\n\t\t\t\t() -> Assertions.assertEquals(Boolean.TRUE,\r\n\t\t\t\t\t\tutilsCommonsTest.dateIncludedBetweenDates(\r\n\t\t\t\t\t\t\t\tutilsCommonsTest.generateDate(day, hour), productResponse)),\r\n\t\t\t\t() -> Assertions.assertEquals(1, productResponse.getBrandId()),\r\n\t\t\t\t() -> Assertions.assertEquals(1, productResponse.getPriceList()),\r\n\t\t\t\t() -> Assertions.assertEquals(\"EUR\", productResponse.getPrice()));\r\n\t}\r\n\r\n\t@Test\r\n\tvoid Test2() {\r\n\r\n\t\tint day = 14;\r\n\t\tint hour = 16;\r\n\t\tProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);\r\n\t\tResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);\r\n\t\tProductResponse productResponse = response.getBody();\r\n\t\tAssertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),\r\n\t\t\t\t() -> Assertions.assertEquals(25.45D, productResponse.getPrice()),\r\n\t\t\t\t() -> Assertions.assertEquals(Boolean.TRUE,\r\n\t\t\t\t\t\tutilsCommonsTest.dateIncludedBetweenDates(\r\n\t\t\t\t\t\t\t\tutilsCommonsTest.generateDate(day, hour), productResponse)),\r\n\t\t\t\t() -> Assertions.assertEquals(1, productResponse.getBrandId()),\r\n\t\t\t\t() -> Assertions.assertEquals(2, productResponse.getPriceList()));\r\n\t}\r\n\r\n\t@Test\r\n\tvoid Test3() {\r\n\r\n\t\tint day = 14;\r\n\t\tint hour = 21;\r\n\t\tProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);\r\n\t\tResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);\r\n\t\tProductResponse productResponse = response.getBody();\r\n\t\tAssertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),\r\n\t\t\t\t() -> Assertions.assertEquals(35.5F, productResponse.getPrice()),\r\n\t\t\t\t() -> Assertions.assertEquals(Boolean.TRUE,\r\n\t\t\t\t\t\tutilsCommonsTest.dateIncludedBetweenDates(\r\n\t\t\t\t\t\t\t\tutilsCommonsTest.generateDate(day, hour), productResponse)),\r\n\t\t\t\t() -> Assertions.assertEquals(1, productResponse.getBrandId()),\r\n\t\t\t\t() -> Assertions.assertEquals(1, productResponse.getPriceList()));\r\n\t}\r\n\r\n\t@Test\r\n\tvoid Test4() {\r\n\r\n\t\tint day = 15;\r\n\t\tint hour = 10;\r\n\t\tProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);\r\n\t\tResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);\r\n\t\tProductResponse productResponse = response.getBody();\r\n\t\tAssertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),\r\n\t\t\t\t() -> Assertions.assertEquals(30.5F, productResponse.getPrice()),\r\n\t\t\t\t() -> Assertions.assertEquals(Boolean.TRUE,\r\n\t\t\t\t\t\tutilsCommonsTest.dateIncludedBetweenDates(\r\n\t\t\t\t\t\t\t\tutilsCommonsTest.generateDate(day, hour), productResponse)),\r\n\t\t\t\t() -> Assertions.assertEquals(1, productResponse.getBrandId()),\r\n\t\t\t\t() -> Assertions.assertEquals(3, productResponse.getPriceList()));\r\n\t}\r\n\r\n\t@Test\r\n\tvoid Test5() {\r\n\r\n\t\tint day = 16;\r\n\t\tint hour = 21;\r\n\t\tProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);\r\n\t\tResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);\r\n\t\tProductResponse productResponse = response.getBody();\r\n\t\tAssertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),\r\n\t\t\t\t() -> Assertions.assertEquals(38.95D, productResponse.getPrice()),\r\n\t\t\t\t() -> Assertions.assertEquals(Boolean.TRUE,\r\n\t\t\t\t\t\tutilsCommonsTest.dateIncludedBetweenDates(\r\n\t\t\t\t\t\t\t\tutilsCommonsTest.generateDate(day, hour), productResponse)),\r\n\t\t\t\t() -> Assertions.assertEquals(1, productResponse.getBrandId()),\r\n\t\t\t\t() -> Assertions.assertEquals(4, productResponse.getPriceList()));\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java b/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java
+--- a/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java	(date 1683126141642)
+@@ -1,42 +1,46 @@
+ package com.inditex.ecommerce;
+-
++;
+ import com.inditex.ecommerce.application.request.ProductRequest;
+ import com.inditex.ecommerce.application.response.ProductResponse;
+-import com.inditex.ecommerce.utils.UtilsCommonsTest;
+ import org.junit.jupiter.api.Assertions;
+ import org.junit.jupiter.api.Test;
++import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.boot.test.context.SpringBootTest;
+-import org.springframework.boot.test.context.SpringBootTest.*;
++import org.springframework.boot.test.web.client.TestRestTemplate;
++import org.springframework.boot.test.web.server.LocalServerPort;
++import org.springframework.http.HttpMethod;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
++import org.springframework.web.util.UriComponentsBuilder;
+ 
++import java.time.LocalDateTime;
+ 
+-@SpringBootTest(classes = ECommerceServiceApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
++
++@SpringBootTest(classes = ECommerceServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+ class ECommerceApplicationTests {
+ 
+-	private final UtilsCommonsTest utilsCommonsTest;
++	@Autowired
++	private TestRestTemplate testRestTemplate;
+ 
+-	ECommerceApplicationTests(UtilsCommonsTest utilsCommonsTest) {
+-		this.utilsCommonsTest = utilsCommonsTest;
+-	}
+-
++	@LocalServerPort
++	private Integer localPort;
+ 
+ 	@Test
+ 	void Test1() {
+ 
+ 		int day = 14;
+ 		int hour = 10;
+-		ProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);
+-		ResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);
++		int year = 2020;
++		ProductRequest productRequest = this.generateRequest(day,hour,year);
++		ResponseEntity<ProductResponse> response = this.callToController(productRequest);
+ 		ProductResponse productResponse = response.getBody();
+ 		Assertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),
+ 				() -> Assertions.assertEquals(35.5F, productResponse.getPrice()),
+ 				() -> Assertions.assertEquals(Boolean.TRUE,
+-						utilsCommonsTest.dateIncludedBetweenDates(
+-								utilsCommonsTest.generateDate(day, hour), productResponse)),
++						this.dateIncludedBetweenDates(
++								this.generateDate(day, hour, year), productResponse)),
+ 				() -> Assertions.assertEquals(1, productResponse.getBrandId()),
+-				() -> Assertions.assertEquals(1, productResponse.getPriceList()),
+-				() -> Assertions.assertEquals("EUR", productResponse.getPrice()));
++				() -> Assertions.assertEquals(1, productResponse.getPriceList()));
+ 	}
+ 
+ 	@Test
+@@ -44,14 +48,15 @@
+ 
+ 		int day = 14;
+ 		int hour = 16;
+-		ProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);
+-		ResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);
++		int year = 2020;
++		ProductRequest productRequest = this.generateRequest(day,hour,year);
++		ResponseEntity<ProductResponse> response = this.callToController(productRequest);
+ 		ProductResponse productResponse = response.getBody();
+ 		Assertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),
+ 				() -> Assertions.assertEquals(25.45D, productResponse.getPrice()),
+ 				() -> Assertions.assertEquals(Boolean.TRUE,
+-						utilsCommonsTest.dateIncludedBetweenDates(
+-								utilsCommonsTest.generateDate(day, hour), productResponse)),
++						this.dateIncludedBetweenDates(
++								this.generateDate(day, hour,year), productResponse)),
+ 				() -> Assertions.assertEquals(1, productResponse.getBrandId()),
+ 				() -> Assertions.assertEquals(2, productResponse.getPriceList()));
+ 	}
+@@ -61,14 +66,15 @@
+ 
+ 		int day = 14;
+ 		int hour = 21;
+-		ProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);
+-		ResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);
++		int year = 2020;
++		ProductRequest productRequest = this.generateRequest(day,hour,year);
++		ResponseEntity<ProductResponse> response = this.callToController(productRequest);
+ 		ProductResponse productResponse = response.getBody();
+ 		Assertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),
+ 				() -> Assertions.assertEquals(35.5F, productResponse.getPrice()),
+ 				() -> Assertions.assertEquals(Boolean.TRUE,
+-						utilsCommonsTest.dateIncludedBetweenDates(
+-								utilsCommonsTest.generateDate(day, hour), productResponse)),
++						this.dateIncludedBetweenDates(
++								this.generateDate(day, hour,year), productResponse)),
+ 				() -> Assertions.assertEquals(1, productResponse.getBrandId()),
+ 				() -> Assertions.assertEquals(1, productResponse.getPriceList()));
+ 	}
+@@ -78,14 +84,15 @@
+ 
+ 		int day = 15;
+ 		int hour = 10;
+-		ProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);
+-		ResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);
++		int year = 2020;
++		ProductRequest productRequest = this.generateRequest(day,hour,year);
++		ResponseEntity<ProductResponse> response = this.callToController(productRequest);
+ 		ProductResponse productResponse = response.getBody();
+ 		Assertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),
+ 				() -> Assertions.assertEquals(30.5F, productResponse.getPrice()),
+ 				() -> Assertions.assertEquals(Boolean.TRUE,
+-						utilsCommonsTest.dateIncludedBetweenDates(
+-								utilsCommonsTest.generateDate(day, hour), productResponse)),
++						this.dateIncludedBetweenDates(
++								this.generateDate(day, hour,year), productResponse)),
+ 				() -> Assertions.assertEquals(1, productResponse.getBrandId()),
+ 				() -> Assertions.assertEquals(3, productResponse.getPriceList()));
+ 	}
+@@ -95,16 +102,69 @@
+ 
+ 		int day = 16;
+ 		int hour = 21;
+-		ProductRequest productRequest = utilsCommonsTest.generateRequest(day,hour);
+-		ResponseEntity<ProductResponse> response = utilsCommonsTest.callToController(productRequest);
++		int year = 2020;
++		ProductRequest productRequest = this.generateRequest(day,hour,year);
++		ResponseEntity<ProductResponse> response = this.callToController(productRequest);
+ 		ProductResponse productResponse = response.getBody();
+ 		Assertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),
+ 				() -> Assertions.assertEquals(38.95D, productResponse.getPrice()),
+ 				() -> Assertions.assertEquals(Boolean.TRUE,
+-						utilsCommonsTest.dateIncludedBetweenDates(
+-								utilsCommonsTest.generateDate(day, hour), productResponse)),
++						this.dateIncludedBetweenDates(
++								this.generateDate(day, hour,year), productResponse)),
+ 				() -> Assertions.assertEquals(1, productResponse.getBrandId()),
+ 				() -> Assertions.assertEquals(4, productResponse.getPriceList()));
+ 	}
+ 
++	@Test
++	void Test6() {
++
++		int day = 16;
++		int hour = 21;
++		int year = 2021;
++		ProductRequest productRequest = this.generateRequest(day,hour,year);
++		ResponseEntity<ProductResponse> response = this.callToController(productRequest);
++		ProductResponse productResponse = response.getBody();
++		Assertions.assertAll(() -> Assertions.assertEquals(HttpStatus.OK, response.getStatusCode()),
++				() -> Assertions.assertNull(productResponse.getPrice()),
++				() -> Assertions.assertNull(productResponse.getBrandId()),
++				() -> Assertions.assertNull(productResponse.getPriceList()));
++	}
++
++
++
++
++	private ResponseEntity<ProductResponse> callToController(ProductRequest productRequest) {
++		UriComponentsBuilder paramBuilder = this.queryParamBuilder(productRequest.getCurrentDate(),
++				productRequest.getProductId(), productRequest.getBrandId());
++
++		ResponseEntity<ProductResponse> response = this.doGet(paramBuilder);
++		return response;
++	}
++
++	private UriComponentsBuilder queryParamBuilder(LocalDateTime currentDate, Long productId, Long brandId) {
++		return UriComponentsBuilder.fromHttpUrl("http://localhost:" + localPort + "/api/v1/product")
++				.queryParam("currentDate", currentDate)
++				.queryParam("productId", productId)
++				.queryParam("brandId", brandId);
++	}
++
++
++	private ResponseEntity<ProductResponse> doGet(UriComponentsBuilder builder) {
++		return testRestTemplate.exchange(
++				builder.build().encode().toUri(),
++				HttpMethod.GET, null, ProductResponse.class);
++	}
++
++	private ProductRequest generateRequest(int day, int hour, int year) {
++		return new ProductRequest(35455L, 1L, this.generateDate(day, hour, year));
++	}
++
++	private LocalDateTime generateDate(int day, int hour, int year) {
++		return LocalDateTime.of(year, 6, day, hour, 0, 0);
++	}
++
++	private boolean dateIncludedBetweenDates(LocalDateTime currenDate, ProductResponse productResponse) {
++		return true;
++	}
++
+ }
+Index: ecommerce_hex/src/main/resources/data.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>INSERT INTO BRAND_ENTITY VALUES (1, 'ZARA');\r\nINSERT INTO PRODUCT_ENTITY VALUES (1, 'EUR','2020-12-31 23:59:59',35.50,0,35455,'2020-06-14 00:00:00',1);\r\nINSERT INTO PRODUCT_ENTITY VALUES (2, 'EUR','2020-06-14 18:30:00',25.45,1,35455,'2020-06-14 15:00:00',1);\r\nINSERT INTO PRODUCT_ENTITY VALUES (3, 'EUR','2020-06-15 11:00:00',30.50,1,35455,'2020-06-15 00:00:00',1);\r\nINSERT INTO PRODUCT_ENTITY VALUES (4, 'EUR','2020-12-31 23:59:59',38.95,1,35455,'2020-06-15 16:00:00',1);\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/resources/data.sql b/ecommerce_hex/src/main/resources/data.sql
+--- a/ecommerce_hex/src/main/resources/data.sql	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/resources/data.sql	(date 1683038280944)
+@@ -1,5 +1,5 @@
+-INSERT INTO BRAND_ENTITY VALUES (1, 'ZARA');
+-INSERT INTO PRODUCT_ENTITY VALUES (1, 'EUR','2020-12-31 23:59:59',35.50,0,35455,'2020-06-14 00:00:00',1);
+-INSERT INTO PRODUCT_ENTITY VALUES (2, 'EUR','2020-06-14 18:30:00',25.45,1,35455,'2020-06-14 15:00:00',1);
+-INSERT INTO PRODUCT_ENTITY VALUES (3, 'EUR','2020-06-15 11:00:00',30.50,1,35455,'2020-06-15 00:00:00',1);
+-INSERT INTO PRODUCT_ENTITY VALUES (4, 'EUR','2020-12-31 23:59:59',38.95,1,35455,'2020-06-15 16:00:00',1);
++INSERT INTO BRAND VALUES (1, 'ZARA');
++INSERT INTO PRODUCT VALUES (1, 'EUR','2020-12-31 23:59:59',35.50,0,35455,'2020-06-14 00:00:00',1);
++INSERT INTO PRODUCT VALUES (2, 'EUR','2020-06-14 18:30:00',25.45,1,35455,'2020-06-14 15:00:00',1);
++INSERT INTO PRODUCT VALUES (3, 'EUR','2020-06-15 11:00:00',30.50,1,35455,'2020-06-15 00:00:00',1);
++INSERT INTO PRODUCT VALUES (4, 'EUR','2020-12-31 23:59:59',38.95,1,35455,'2020-06-15 16:00:00',1);
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"68b05b57-139b-41dd-97a7-b7e00c9bead0\" name=\"Changes\" comment=\"fix jpa\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductResponse.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductResponse.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/BrandEntity.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/Brand.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/Product.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductService.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\r\n        <option name=\"useMavenConfig\" value=\"true\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2P2pyEDU4DoleZ5XOEiOgznRu50\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\r\n    \"DELOMBOK_PRE_COMMIT\": \"false\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_hex/src/main/resources\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Dell\\IdeaProjects\\inditexE_commerce\\ecommerce_hex\\src\\main\\resources\" />\r\n      <recent name=\"C:\\Users\\Dell\\IdeaProjects\\inditexE_commerce\\ecommerce_hex\\src\\test\\resources\" />\r\n      <recent name=\"C:\\Users\\Dell\\IdeaProjects\\inditexE_commerce\\ecommerce_mvc\\src\\test\\resources\" />\r\n      <recent name=\"C:\\Users\\Dell\\IdeaProjects\\inditexE_commerce\\ecommerce_hex\\src\\main\\java\\com\\inditex\\ecommerce\\infrastructure\\entity\" />\r\n      <recent name=\"C:\\Users\\Dell\\IdeaProjects\\inditexE_commerce\\src\\main\\resources\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"com.inditex.ecommerce.model.dto\" />\r\n      <recent name=\"com.inditex.ecommerce\" />\r\n      <recent name=\"com.inditex.ecommerce.infrastructure\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.inditex.ecommerce.service.utility.commons\" />\r\n      <recent name=\"com.inditex.ecommerce.infrastructure\" />\r\n      <recent name=\"com.inditex.ecommerce.application.rest\" />\r\n      <recent name=\"com.inditex.ecommerce.application.response\" />\r\n      <recent name=\"com.inditex.ecommerce.application.request\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.ecommerce_mvc\">\r\n    <configuration name=\"ecommerce_exa\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"11\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.inditex.ecommerce.ECommerceServiceApplication\" />\r\n      <module name=\"e-commerce (1)\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ecommerce_mvc\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"11\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.inditex.ecommerce.ECommerceServiceApplication\" />\r\n      <module name=\"e-commerce (2)\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"inditexE_commerce\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"inditexE_commerce\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"e-commerce [clean,package]\" type=\"MavenRunConfiguration\" factoryName=\"Maven\" nameIsGenerated=\"true\">\r\n      <MavenSettings>\r\n        <option name=\"myGeneralSettings\" />\r\n        <option name=\"myRunnerSettings\" />\r\n        <option name=\"myRunnerParameters\">\r\n          <MavenRunnerParameters>\r\n            <option name=\"profiles\">\r\n              <set />\r\n            </option>\r\n            <option name=\"goals\">\r\n              <list>\r\n                <option value=\"clean\" />\r\n                <option value=\"package\" />\r\n              </list>\r\n            </option>\r\n            <option name=\"pomFileName\" />\r\n            <option name=\"profilesMap\">\r\n              <map />\r\n            </option>\r\n            <option name=\"resolveToWorkspace\" value=\"false\" />\r\n            <option name=\"workingDirPath\" value=\"$PROJECT_DIR$\" />\r\n          </MavenRunnerParameters>\r\n        </option>\r\n      </MavenSettings>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.ecommerce_exa\" />\r\n      <item itemvalue=\"Application.ecommerce_mvc\" />\r\n      <item itemvalue=\"Maven.e-commerce [clean,package]\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"68b05b57-139b-41dd-97a7-b7e00c9bead0\" name=\"Changes\" comment=\"\" />\r\n      <created>1682665283782</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1682665283782</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"First Step Spring Initializer\">\r\n      <created>1682665402905</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682665402905</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"add mapstruct mapper\">\r\n      <created>1682666154457</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682666154457</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"config maven to work\">\r\n      <created>1682666567538</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682666567538</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"adding class to structure\">\r\n      <created>1682674943731</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682674943731</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"fix part 1\">\r\n      <created>1682696376808</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682696376809</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"list, pasamos a pruebas\">\r\n      <created>1682771703455</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682771703455</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"fix to receive a single result from query\">\r\n      <created>1682795525165</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682795525165</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"fix to receive a single result from query 2\">\r\n      <created>1682795602652</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682795602652</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"ended\">\r\n      <created>1682955522401</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682955522401</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"config mvc\">\r\n      <created>1682956237159</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682956237159</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"swagger\">\r\n      <created>1682967021911</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682967021911</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"swagger fix properties\">\r\n      <created>1682967798129</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682967798129</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"fix api properties\">\r\n      <created>1683017537782</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683017537782</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"fix entities and sql\">\r\n      <created>1683022256357</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683022256357</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"fix entities and sql\">\r\n      <created>1683030979477</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683030979477</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"fix jpa\">\r\n      <created>1683032113168</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683032113168</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"17\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"First Step Spring Initializer\" />\r\n    <MESSAGE value=\"add mapstruct mapper\" />\r\n    <MESSAGE value=\"config maven to work\" />\r\n    <MESSAGE value=\"adding class to structure\" />\r\n    <MESSAGE value=\"fix part 1\" />\r\n    <MESSAGE value=\"list, pasamos a pruebas\" />\r\n    <MESSAGE value=\"fix to receive a single result from query\" />\r\n    <MESSAGE value=\"fix to receive a single result from query 2\" />\r\n    <MESSAGE value=\"ended\" />\r\n    <MESSAGE value=\"config mvc\" />\r\n    <MESSAGE value=\"swagger\" />\r\n    <MESSAGE value=\"swagger fix properties\" />\r\n    <MESSAGE value=\"fix api properties\" />\r\n    <MESSAGE value=\"fix entities and sql\" />\r\n    <MESSAGE value=\"fix jpa\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fix jpa\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java</url>\r\n          <line>44</line>\r\n          <option name=\"timeStamp\" value=\"15\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/.idea/workspace.xml	(date 1683126647250)
+@@ -4,17 +4,25 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="fix jpa">
++    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="versión mvc sw ok">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/ProductDto.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Brand.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Product.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/application.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/data.sql" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/test/resources/data.sql" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductResponse.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/BrandEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/Brand.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/entity/Product.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/repository/ProductRepository.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/utility/commons/ProductMapper.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductRequest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -58,7 +66,7 @@
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "git-widget-placeholder": "main",
+     "ignore.virus.scanning.warn.message": "true",
+-    "last_opened_file_path": "C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_hex/src/main/resources",
++    "last_opened_file_path": "C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity",
+     "project.structure.last.edited": "Modules",
+     "project.structure.proportion": "0.15",
+     "project.structure.side.proportion": "0.2",
+@@ -67,10 +75,10 @@
+ }]]></component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\main\java\com\inditex\ecommerce\infrastructure\entity" />
+       <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\main\resources" />
+       <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\test\resources" />
+       <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_mvc\src\test\resources" />
+-      <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\main\java\com\inditex\ecommerce\infrastructure\entity" />
+       <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\src\main\resources" />
+     </key>
+     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+@@ -79,14 +87,14 @@
+       <recent name="com.inditex.ecommerce.infrastructure" />
+     </key>
+     <key name="CopyClassDialog.RECENTS_KEY">
++      <recent name="com.inditex.ecommerce" />
+       <recent name="com.inditex.ecommerce.service.utility.commons" />
+       <recent name="com.inditex.ecommerce.infrastructure" />
+       <recent name="com.inditex.ecommerce.application.rest" />
+       <recent name="com.inditex.ecommerce.application.response" />
+-      <recent name="com.inditex.ecommerce.application.request" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Application.ecommerce_mvc">
++  <component name="RunManager" selected="JUnit.ECommerceApplicationTests">
+     <configuration name="ecommerce_exa" type="Application" factoryName="Application">
+       <option name="ALTERNATIVE_JRE_PATH" value="11" />
+       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+@@ -105,6 +113,53 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration name="ECommerceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="e-commerce (2)" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.inditex.ecommerce.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.inditex.ecommerce" />
++      <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceApplicationTests" />
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="ECommerceApplicationTests.Test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="e-commerce (2)" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.inditex.ecommerce.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.inditex.ecommerce" />
++      <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceApplicationTests" />
++      <option name="METHOD_NAME" value="Test1" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="ECommerceApplicationTests.Test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="e-commerce (2)" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.inditex.ecommerce.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="com.inditex.ecommerce" />
++      <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceApplicationTests" />
++      <option name="METHOD_NAME" value="Test3" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration default="true" type="JetRunConfigurationType">
+       <module name="inditexE_commerce" />
+       <method v="2">
+@@ -147,8 +202,18 @@
+     <list>
+       <item itemvalue="Application.ecommerce_exa" />
+       <item itemvalue="Application.ecommerce_mvc" />
++      <item itemvalue="JUnit.ECommerceApplicationTests" />
++      <item itemvalue="JUnit.ECommerceApplicationTests.Test1" />
++      <item itemvalue="JUnit.ECommerceApplicationTests.Test3" />
+       <item itemvalue="Maven.e-commerce [clean,package]" />
+     </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="JUnit.ECommerceApplicationTests" />
++        <item itemvalue="JUnit.ECommerceApplicationTests.Test1" />
++        <item itemvalue="JUnit.ECommerceApplicationTests.Test3" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -271,7 +336,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1683032113168</updated>
+     </task>
+-    <option name="localTasksCounter" value="17" />
++    <task id="LOCAL-00017" summary="versión mvc sw ok">
++      <created>1683040466901</created>
++      <option name="number" value="00017" />
++      <option name="presentableId" value="LOCAL-00017" />
++      <option name="project" value="LOCAL" />
++      <updated>1683040466901</updated>
++    </task>
++    <option name="localTasksCounter" value="18" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -302,7 +374,8 @@
+     <MESSAGE value="fix api properties" />
+     <MESSAGE value="fix entities and sql" />
+     <MESSAGE value="fix jpa" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fix jpa" />
++    <MESSAGE value="versión mvc sw ok" />
++    <option name="LAST_COMMIT_MESSAGE" value="versión mvc sw ok" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+@@ -311,8 +384,23 @@
+           <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/service/ProductServiceImpl.java</url>
+           <line>44</line>
+           <option name="timeStamp" value="15" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java</url>
++          <line>73</line>
++          <option name="timeStamp" value="20" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java</url>
++          <line>28</line>
++          <option name="timeStamp" value="26" />
+         </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+   </component>
++  <component name="com.intellij.coverage.CoverageDataManagerImpl">
++    <SUITE FILE_PATH="coverage/ecommerce$ECommerceApplicationTests.ic" NAME="ECommerceApplicationTests Coverage Results" MODIFIED="1683125735070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>com.inditex.ecommerce.*</FILTER>
++    </SUITE>
++  </component>
+ </project>
+\ No newline at end of file
+Index: ecommerce_hex/src/test/resources/data.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>INSERT INTO BRAND_ENTITY VALUES (1, 'ZARA');\r\nINSERT INTO PRODUCT_ENTITY VALUES (1, 'EUR','2020-12-31 23:59:59',35.50,0,35455,'2020-06-14 00:00:00',1);\r\nINSERT INTO PRODUCT_ENTITY VALUES (2, 'EUR','2020-06-14 18:30:00',25.45,1,35455,'2020-06-14 15:00:00',1);\r\nINSERT INTO PRODUCT_ENTITY VALUES (3, 'EUR','2020-06-15 11:00:00',30.50,1,35455,'2020-06-15 00:00:00',1);\r\nINSERT INTO PRODUCT_ENTITY VALUES (4, 'EUR','2020-12-31 23:59:59',38.95,1,35455,'2020-06-15 16:00:00',1);\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/test/resources/data.sql b/ecommerce_hex/src/test/resources/data.sql
+--- a/ecommerce_hex/src/test/resources/data.sql	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/test/resources/data.sql	(date 1683038280944)
+@@ -1,5 +1,5 @@
+-INSERT INTO BRAND_ENTITY VALUES (1, 'ZARA');
+-INSERT INTO PRODUCT_ENTITY VALUES (1, 'EUR','2020-12-31 23:59:59',35.50,0,35455,'2020-06-14 00:00:00',1);
+-INSERT INTO PRODUCT_ENTITY VALUES (2, 'EUR','2020-06-14 18:30:00',25.45,1,35455,'2020-06-14 15:00:00',1);
+-INSERT INTO PRODUCT_ENTITY VALUES (3, 'EUR','2020-06-15 11:00:00',30.50,1,35455,'2020-06-15 00:00:00',1);
+-INSERT INTO PRODUCT_ENTITY VALUES (4, 'EUR','2020-12-31 23:59:59',38.95,1,35455,'2020-06-15 16:00:00',1);
++INSERT INTO BRAND VALUES (1, 'ZARA');
++INSERT INTO PRODUCT VALUES (1, 'EUR','2020-12-31 23:59:59',35.50,0,35455,'2020-06-14 00:00:00',1);
++INSERT INTO PRODUCT VALUES (2, 'EUR','2020-06-14 18:30:00',25.45,1,35455,'2020-06-14 15:00:00',1);
++INSERT INTO PRODUCT VALUES (3, 'EUR','2020-06-15 11:00:00',30.50,1,35455,'2020-06-15 00:00:00',1);
++INSERT INTO PRODUCT VALUES (4, 'EUR','2020-12-31 23:59:59',38.95,1,35455,'2020-06-15 16:00:00',1);
+Index: ecommerce_hex/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>server-port=9090\r\nspring.jpa.hibernate.naming.physical-strategy=com.inditex.ecommerce.infrastructure.config.CustomPhysicalNamingStrategy\r\n\r\nspring.datasource.driver-class-name = org.hsqldb.jdbcDriver\r\nspring.datasource.username=sa\r\nspring.datasource.password=\r\nspring.jpa.database-platform=org.hibernate.dialect.H2Dialect\r\nspring.jpa.showSql=true\r\nspring.jpa.defer-datasource-initialization=true\r\nspring.h2.console.path=/h2-console\r\nspring.h2.console.enabled=true\r\nspring.jpa.hibernate.ddl-auto = create-drop\r\nspring.mvc.pathmatch.matching-strategy =\r\n\r\nlogging.level.org.hibernate.SQL=DEBUG\r\nlogging.level.org.hibernate.type=TRACE
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/resources/application.properties b/ecommerce_hex/src/main/resources/application.properties
+--- a/ecommerce_hex/src/main/resources/application.properties	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/resources/application.properties	(date 1683126141634)
+@@ -1,7 +1,7 @@
+ server-port=9090
+-spring.jpa.hibernate.naming.physical-strategy=com.inditex.ecommerce.infrastructure.config.CustomPhysicalNamingStrategy
+-
+-spring.datasource.driver-class-name = org.hsqldb.jdbcDriver
++#spring.datasource.driver-class-name = org.hsqldb.jdbcDriver
++spring.datasource.url=jdbc:h2:mem:testdb
++spring.datasource.driverClassName=org.h2.Driver
+ spring.datasource.username=sa
+ spring.datasource.password=
+ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+@@ -10,7 +10,13 @@
+ spring.h2.console.path=/h2-console
+ spring.h2.console.enabled=true
+ spring.jpa.hibernate.ddl-auto = create-drop
+-spring.mvc.pathmatch.matching-strategy =
++spring.jpa.generate-ddl=true
++spring.jpa.properties.hibernate.show_sql=true
++spring.jpa.properties.hibernate.use_sql_comments=true
++spring.jpa.properties.hibernate.format_sql=true
++spring.datasource.initialization-mode=always
++spring.mvc.pathmatch.matching-strategy = ANT_PATH_MATCHER
++spring.jpa.hibernate.naming.physical-strategy=com.inditex.ecommerce.service.utility.commons.CustomPhysicalNamingStrategy
+ 
+ logging.level.org.hibernate.SQL=DEBUG
+ logging.level.org.hibernate.type=TRACE
+\ No newline at end of file
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce.application.response;\r\n\r\nimport lombok.Getter;\r\nimport lombok.NoArgsConstructor;\r\nimport lombok.Setter;\r\nimport org.springframework.format.annotation.DateTimeFormat;\r\n\r\nimport java.time.LocalDateTime;\r\n/**\r\n *\r\n * @author jcagigas\r\n */\r\n@Getter\r\n@Setter\r\n@NoArgsConstructor\r\npublic class ProductResponse {\r\n\r\n    private Long productId;\r\n    private Long brandId;\r\n    private Integer priceList;\r\n    private Double price;\r\n    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)\r\n    private LocalDateTime startDate;\r\n    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)\r\n    private LocalDateTime endDate;\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java	(date 1683127111026)
+@@ -17,11 +17,9 @@
+ 
+     private Long productId;
+     private Long brandId;
+-    private Integer priceList;
++    private Long priceList;
+     private Double price;
+-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+     private LocalDateTime startDate;
+-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+     private LocalDateTime endDate;
+ 
+ }
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.inditex.ecommerce.domain.repository;\r\n/**\r\n *\r\n * @author jcagigas\r\n */\r\nimport com.inditex.ecommerce.application.request.ProductRequest;\r\nimport com.inditex.ecommerce.domain.Product;\r\n\r\nimport java.util.Optional;\r\n\r\npublic interface ProductRepository {\r\n\r\n    Optional<Product> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java	(date 1683126645889)
+@@ -4,11 +4,11 @@
+  * @author jcagigas
+  */
+ import com.inditex.ecommerce.application.request.ProductRequest;
+-import com.inditex.ecommerce.domain.Product;
++import com.inditex.ecommerce.domain.ProductDto;
+ 
+ import java.util.Optional;
+ 
+ public interface ProductRepository {
+ 
+-    Optional<Product> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest);
++    Optional<ProductDto> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest);
+ }
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandEntity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandEntity.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Brand.java
+rename from ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandEntity.java
+rename to ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Brand.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandEntity.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Brand.java	(date 1683126645864)
+@@ -1,7 +1,8 @@
+ package com.inditex.ecommerce.infrastructure.entity;
+ 
+-import lombok.Data;
+ import lombok.EqualsAndHashCode;
++import lombok.Getter;
++import lombok.Setter;
+ 
+ import javax.persistence.*;
+ import java.util.HashSet;
+@@ -12,10 +13,10 @@
+  * @author jcagigas
+  */
+ @Entity
+-@Table
+-@Data
++@Getter
++@Setter
+ @EqualsAndHashCode
+-public class BrandEntity {
++public class Brand {
+ 
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+@@ -23,6 +24,6 @@
+ 
+     private String name;
+ 
+-    @OneToMany(mappedBy="brandEntity",cascade=CascadeType.ALL)
+-    private Set<ProductEntity> productEntities = new HashSet<>();
++    @OneToMany(mappedBy="brand",cascade=CascadeType.ALL)
++    private Set<Product> productEntities = new HashSet<>();
+ }
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Product.java
+rename from ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java
+rename to ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Product.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Product.java	(date 1683126645909)
+@@ -1,32 +1,36 @@
+ package com.inditex.ecommerce.infrastructure.entity;
+ 
+-import lombok.Data;
+ import lombok.EqualsAndHashCode;
++import lombok.Getter;
++import lombok.Setter;
+ 
+ import javax.persistence.*;
+-import java.sql.Timestamp;
++import java.io.Serializable;
++import java.time.LocalDateTime;
++
+ /**
+  *
+  * @author jcagigas
+  */
+ @Entity
+ @Table
+-@Data
++@Getter
++@Setter
+ @EqualsAndHashCode
+-public class ProductEntity {
++public class Product implements Serializable {
+ 
+ 	@Id
+ 	@GeneratedValue(strategy = GenerationType.AUTO)
+ 	private Long priceList;
+ 
+ 	@ManyToOne (cascade=CascadeType.ALL)
+-	private BrandEntity brandEntity;
++	private Brand brand;
+ 
+ 	private Long productId;
+ 
+-	private Timestamp startDate;
++	private LocalDateTime startDate;
+ 
+-	private Timestamp endDate;
++	private LocalDateTime endDate;
+ 
+ 	private Integer priority;
+ 
+Index: ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java b/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/ProductDto.java
+rename from ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java
+rename to ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/ProductDto.java
+--- a/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java	(revision c310c4b24907fb8f104fd54699337e308f0b2781)
++++ b/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/ProductDto.java	(date 1683126645919)
+@@ -12,7 +12,7 @@
+ @Getter
+ @Setter
+ @EqualsAndHashCode
+-public class Product {
++public class ProductDto {
+ 
+     private Long productId;
+ 

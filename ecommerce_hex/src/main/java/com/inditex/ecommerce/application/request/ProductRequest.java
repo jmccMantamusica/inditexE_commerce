@@ -17,5 +17,6 @@ public class ProductRequest {
 
     private Long productId;
     private Long brandId;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime currentDate;
 }

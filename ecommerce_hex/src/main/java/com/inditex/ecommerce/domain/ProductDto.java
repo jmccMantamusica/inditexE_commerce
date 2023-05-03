@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Product {
+public class ProductDto {
 
     private Long productId;
 

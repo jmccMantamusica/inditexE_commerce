@@ -17,11 +17,9 @@ public class ProductResponse {
 
     private Long productId;
     private Long brandId;
-    private Integer priceList;
+    private Long priceList;
     private Double price;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startDate;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endDate;
 
 }

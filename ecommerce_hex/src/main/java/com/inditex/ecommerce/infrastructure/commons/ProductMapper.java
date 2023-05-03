@@ -1,8 +1,8 @@
 package com.inditex.ecommerce.infrastructure.commons;
 
 import com.inditex.ecommerce.application.response.ProductResponse;
-import com.inditex.ecommerce.domain.Product;
-import com.inditex.ecommerce.infrastructure.entity.ProductEntity;
+import com.inditex.ecommerce.domain.ProductDto;
+import com.inditex.ecommerce.infrastructure.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,10 +16,9 @@ import java.time.ZoneId;
 @Mapper
 public interface ProductMapper {
 
-    ProductResponse toDomain(Product product);
+    @Mapping(source = "entity.brand.id", target = "brandId")
+    ProductDto toDto(Product entity);
 
-    @Mapping(source = "entity.brandEntity.id", target = "brandId")
-    Product toModel(ProductEntity entity);
 
     default LocalDateTime mapTimestamp(Timestamp timestamp) {
         return timestamp.toInstant()

@@ -1,6 +1,7 @@
 package com.inditex.ecommerce.infrastructure.repository;
 
-import com.inditex.ecommerce.infrastructure.entity.ProductEntity;
+import com.inditex.ecommerce.infrastructure.entity.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -11,11 +12,11 @@ import java.util.Optional;
  * @author jcagigas
  */
 @Repository
-public interface JpaProductRepository {
+public interface JpaProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT p FROM PRODUCT_ENTITY p " +
             "WHERE p.PRODUCT_ID=:productId AND p.BRAND_ENTITY_ID=:brandId " +
             "AND :currentDate BETWEEN p.START_DATE AND p.END_DATE" +
             "ORDER BY p.PRIORITY DESC LIMIT 1")
-    Optional<ProductEntity> findByProductIdAndBrandIdAndCurrentDate(Long productId, Long brandId,
+    Optional<Product> findByProductIdAndBrandIdAndCurrentDate(Long productId, Long brandId,
                                                                     LocalDateTime currentDate);
 }

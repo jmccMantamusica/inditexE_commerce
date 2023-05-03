@@ -1,11 +1,11 @@
 package com.inditex.ecommerce.infrastructure.repository;
 
 import com.inditex.ecommerce.application.request.ProductRequest;
-import com.inditex.ecommerce.domain.Product;
+import com.inditex.ecommerce.domain.ProductDto;
 import com.inditex.ecommerce.domain.repository.ProductRepository;
 import com.inditex.ecommerce.infrastructure.commons.ProductMapper;
 
-import com.inditex.ecommerce.infrastructure.entity.ProductEntity;
+import com.inditex.ecommerce.infrastructure.entity.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +33,16 @@ public class JpaProductRepositoryAdapter implements ProductRepository {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Product> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest) {
+    public Optional<ProductDto> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest) {
 
-        Optional<ProductEntity> productEntity = jpaProductRepository.findByProductIdAndBrandIdAndCurrentDate(
+        Optional<Product> productEntity = jpaProductRepository.findByProductIdAndBrandIdAndCurrentDate(
                 productRequest.getProductId(), productRequest.getBrandId(), productRequest.getCurrentDate());
 
         if (!productEntity.isPresent()) {
             logger.error("There is no product with the requested data.");
             return Optional.empty();
         } else {
-            return Optional.of(productMapper.toModel(productEntity.get()));
+            return Optional.of(productMapper.toDto(productEntity.get()));
         }
     }
 
