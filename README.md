@@ -37,6 +37,6 @@ Response:   - identificador de producto
 - Test 5: petición a las 21:00 del día 16 del producto 35455   para la brand 1 (Zara)
 
 La aplicación contiene OpenAPi para pruebas funcionales.
-Se ha testeado al 83%.
+Se ha testeado al 83%(MVC).
 
 Tenemos dos aplicaciones para el mismo ejercicio en Arquitectura Hexagonal (pendiente de acabar y en Arquitectura MVC)
