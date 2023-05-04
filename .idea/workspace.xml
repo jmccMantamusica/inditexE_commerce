@@ -4,25 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="versión mvc sw ok">
+    <list default="true" id="68b05b57-139b-41dd-97a7-b7e00c9bead0" name="Changes" comment="fix query, without limit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/rest/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/rest/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/DomainProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/domain/service/DomainProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/commons/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/BrandEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Brand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/repository/JpaProductRepositoryAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/test/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_hex/src/test/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce_hex/src/main/resources/data.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/model/dto/ProductRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/main/resources/data.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce_mvc/src/test/java/com/inditex/ecommerce/utils/UtilsCommonsTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,20 +50,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DELOMBOK_PRE_COMMIT": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DELOMBOK_PRE_COMMIT&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dell/IdeaProjects/inditexE_commerce/ecommerce_hex/src/main/java/com/inditex/ecommerce/infrastructure/entity&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dell\IdeaProjects\inditexE_commerce\ecommerce_hex\src\main\java\com\inditex\ecommerce\infrastructure\entity" />
@@ -94,7 +85,7 @@
       <recent name="com.inditex.ecommerce.application.response" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ECommerceApplicationTests">
+  <component name="RunManager" selected="JUnit.ECommerceApplicationTests (1)">
     <configuration name="ecommerce_exa" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -113,6 +104,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ECommerceApplicationTests (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="e-commerce (1)" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.inditex.ecommerce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.inditex.ecommerce" />
+      <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ECommerceApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="e-commerce (2)" />
       <extension name="coverage">
@@ -124,6 +130,22 @@
       <option name="PACKAGE_NAME" value="com.inditex.ecommerce" />
       <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceApplicationTests" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ECommerceApplicationTests.Test1 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="e-commerce (1)" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.inditex.ecommerce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.inditex.ecommerce" />
+      <option name="MAIN_CLASS_NAME" value="com.inditex.ecommerce.ECommerceApplicationTests" />
+      <option name="METHOD_NAME" value="Test1" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -202,6 +224,8 @@
     <list>
       <item itemvalue="Application.ecommerce_exa" />
       <item itemvalue="Application.ecommerce_mvc" />
+      <item itemvalue="JUnit.ECommerceApplicationTests (1)" />
+      <item itemvalue="JUnit.ECommerceApplicationTests.Test1 (1)" />
       <item itemvalue="JUnit.ECommerceApplicationTests" />
       <item itemvalue="JUnit.ECommerceApplicationTests.Test1" />
       <item itemvalue="JUnit.ECommerceApplicationTests.Test3" />
@@ -209,6 +233,8 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ECommerceApplicationTests (1)" />
+        <item itemvalue="JUnit.ECommerceApplicationTests.Test1 (1)" />
         <item itemvalue="JUnit.ECommerceApplicationTests" />
         <item itemvalue="JUnit.ECommerceApplicationTests.Test1" />
         <item itemvalue="JUnit.ECommerceApplicationTests.Test3" />
@@ -343,7 +369,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683040466901</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="versión mvc ok testing 83%">
+      <created>1683127124746</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1683127124746</updated>
+    </task>
+    <task id="LOCAL-00019" summary="correcciones para hexagonal">
+      <created>1683127167622</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1683127167622</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix query, without limit">
+      <created>1683127312871</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1683127312871</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -375,7 +422,10 @@
     <MESSAGE value="fix entities and sql" />
     <MESSAGE value="fix jpa" />
     <MESSAGE value="versión mvc sw ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="versión mvc sw ok" />
+    <MESSAGE value="versión mvc ok testing 83%" />
+    <MESSAGE value="correcciones para hexagonal" />
+    <MESSAGE value="fix query, without limit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix query, without limit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -392,13 +442,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/ecommerce_mvc/src/main/java/com/inditex/ecommerce/controller/ProductController.java</url>
-          <line>28</line>
+          <line>31</line>
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ecommerce_hex/src/test/java/com/inditex/ecommerce/ECommerceApplicationTests.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/ecommerce_hex/src/main/java/com/inditex/ecommerce/application/response/ProductResponse.java</url>
+          <line>17</line>
+          <properties field="productId" class="com.inditex.ecommerce.application.response.ProductResponse" />
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ecommerce$ECommerceApplicationTests__1_.ic" NAME="ECommerceApplicationTests (1) Coverage Results" MODIFIED="1683185277378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.inditex.ecommerce.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/ecommerce$ECommerceApplicationTests.ic" NAME="ECommerceApplicationTests Coverage Results" MODIFIED="1683125735070" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.inditex.ecommerce.*</FILTER>
     </SUITE>

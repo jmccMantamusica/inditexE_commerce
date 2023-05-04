@@ -1,6 +1,7 @@
 package com.inditex.ecommerce.infrastructure.repository;
 
 import com.inditex.ecommerce.application.request.ProductRequest;
+import com.inditex.ecommerce.application.response.ProductResponse;
 import com.inditex.ecommerce.domain.ProductDto;
 import com.inditex.ecommerce.domain.repository.ProductRepository;
 import com.inditex.ecommerce.infrastructure.commons.ProductMapper;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 /**
  *
@@ -32,18 +34,28 @@ public class JpaProductRepositoryAdapter implements ProductRepository {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<ProductDto> findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest) {
+    public ProductResponse findByProductIdAndBrandIdAndCurrentDate(ProductRequest productRequest) {
+        ProductResponse response = new ProductResponse();
+        try {
+            List<Product> productEntities = jpaProductRepository.findByProductIdAndBrandIdAndCurrentDate(
+                    productRequest.getProductId(), productRequest.getBrandId(), productRequest.getCurrentDate());
+            response = this.retrieveMaxPriority(productEntities);
 
-        Optional<Product> productEntity = jpaProductRepository.findByProductIdAndBrandIdAndCurrentDate(
-                productRequest.getProductId(), productRequest.getBrandId(), productRequest.getCurrentDate());
-
-        if (!productEntity.isPresent()) {
-            logger.error("There is no product with the requested data.");
-            return Optional.empty();
-        } else {
-            return Optional.of(productMapper.toDto(productEntity.get()));
+        } catch (Exception e) {
+            logger.error("Error en BBDD por: " + e.getMessage());
         }
+        return response;
+    }
+
+    private ProductResponse retrieveMaxPriority(List<Product> productEntities){
+        Optional<Product> entity = productEntities.stream().findFirst();
+        ProductResponse response = new ProductResponse();
+        if(entity.isPresent()){
+            response =productMapper.toResponse(entity.get());
+        }else{
+            logger.info("there is no chosen value");
+        }
+        return response;
     }
 
 }
