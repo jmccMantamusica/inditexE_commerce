@@ -2,7 +2,6 @@ package com.inditex.ecommerce.infrastructure.repository;
 
 import com.inditex.ecommerce.application.request.ProductRequest;
 import com.inditex.ecommerce.application.response.ProductResponse;
-import com.inditex.ecommerce.domain.ProductDto;
 import com.inditex.ecommerce.domain.repository.ProductRepository;
 import com.inditex.ecommerce.infrastructure.commons.ProductMapper;
 
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

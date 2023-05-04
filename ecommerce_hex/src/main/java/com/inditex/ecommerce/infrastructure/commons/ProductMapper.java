@@ -1,7 +1,6 @@
 package com.inditex.ecommerce.infrastructure.commons;
 
 import com.inditex.ecommerce.application.response.ProductResponse;
-import com.inditex.ecommerce.domain.ProductDto;
 import com.inditex.ecommerce.infrastructure.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
