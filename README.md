@@ -35,8 +35,9 @@ Response:   - identificador de producto
 - Test 3: petición a las 21:00 del día 14 del producto 35455   para la brand 1 (Zara)
 - Test 4: petición a las 10:00 del día 15 del producto 35455   para la brand 1 (Zara)
 - Test 5: petición a las 21:00 del día 16 del producto 35455   para la brand 1 (Zara)
+- Test 6: petición para búsqueda sin resultados, respuesta null
 
 La aplicación contiene OpenAPi para pruebas funcionales.
-Se ha testeado al 83%(MVC).
+Se ha testeado al 83% para ambas arquitecturas.
 
-Tenemos dos aplicaciones para el mismo ejercicio en Arquitectura Hexagonal (pendiente de acabar y en Arquitectura MVC)
+Tenemos dos aplicaciones para el mismo ejercicio en Arquitectura Hexagonal y en Arquitectura MVC, ambas apliaciones constan de un sql.
